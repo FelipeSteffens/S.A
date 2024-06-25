@@ -1,0 +1,34 @@
+.login{
+    text-align: center;
+}
+.cadastro{
+    text-align: center;
+}
+#logo{
+    height: 75px;
+    width: auto;
+    padding: 20px;
+    top: 0;
+}
+#pesquisar{
+    position: relative;
+    width: 20vw;
+    height: 3vh;
+    top: 45px;
+    left: 25vw;
+}
+#entrar{
+    position: relative;
+    width: auto;
+    height: 4vh;
+    top: 45px;
+    left: 55vw;
+
+}
+.cabecalho{
+    height: min-content;
+    width: 98vw;
+    display: inline-flex;
+    gap: 10px;
+    top: 0;    
+}

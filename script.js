@@ -1,12 +1,14 @@
-const campoLogin = document.getElementById("usarname")
+const campoLogin = document.getElementById("username")
 const campoSenha = document.getElementById("senha")
-const campoNovoLogin = document.getElementById("newUsarname")
+const campoNovoLogin = document.getElementById("newUsername")
 const campoNovaSenha = document.getElementById("newSenha")
 const campoRepSenha = document.getElementById("confirmSenha")
+const campoEmail = document.getElementById("newEmail")
+const painel = document.getElementById('painel')
 
 
 
-function login(){
+function login(){           
     let login = campoLogin.value
     let senha = campoSenha.value
 
@@ -22,29 +24,38 @@ function login(){
                 localStorage.setItem("logado", JSON.stringify(usuario))
                 window.location.href = "index.html"
                 break
-                
+
             }
         }
     }
     alert(mensagem)
+    form.reset(); 
 }
 
 function cadastro(){
-    if (campoNovaSenha.value == campoRepSenha.value){
-        let usuario = {
 
+    if(campoNovoLogin.value == "" || campoNovaSenha.value == "" || campoEmail.value == "" || campoRepSenha.value == ""){
+
+        alert("Você não preencheu os dados solicitados!");
+        return
+
+    }
+    if (campoNovaSenha.value == campoRepSenha.value){
+        const usuario = {
+
+            email: campoEmail.value,
             login: campoNovoLogin.value,
             senha: campoNovaSenha.value,
 
         };
-    
+
     let bancoDeDados = JSON.parse(localStorage.getItem("bancoDeDados"))
     if(bancoDeDados == null){
         bancoDeDados = [];
     }
     if(existe(usuario, bancoDeDados)){
         alert("Esse login ja está cadastrado!")
-        window.location.href = "index.html"  
+        window.location.href = "home.html"  
     }
     else{
         bancoDeDados.push(usuario)
@@ -53,10 +64,144 @@ function cadastro(){
         window.location.href = "index.html"
     }
     }else{
-        alert("As senhas não são iguais!")
+    alert("As senhas não são iguais!")
     }
+    localStorage.clear(bancoDeDados);
+}
+let nome = document.getElementById('productName')
+let descricao = document.getElementById('productDescription')
+let preco = document.getElementById('productPrice')
+
+let produtos = JSON.parse(localStorage.getItem("produtos")) || []
+let encontrado = -1
+
+function cadastrar(){
+    let produto = {
+        nome: nome.value,
+        descricao: descricao.value,
+        preco: Number(preco.value)
+    }
+        produtos.push(produto) 
+        console.log(produtos);
+        limparFormulario()
+
+        localStorage.setItem("produtos", JSON.stringify(produtos))
+        alert("Produto Cadastrado com sucesso")
     
 }
+
+function pesquisar(){
+    let pesquisa = nome.value
+    for(i=0;i<produtos.length;i++){
+        console.log(produtos[i].nome)
+        // testar se é o certo
+        if(produtos[i].nome == pesquisa){
+           
+            descricao.value = produtos[i].descricao
+            preco.value = produtos[i].preco
+            encontrado = i
+
+        }
+    }
+
+    console.log(pesquisa);
+}
+function lista(){
+    painel.innerHTML = ''
+    for(i=0; i<produtos.length; i++){
+        painel.innerHTML += '<h2>'+produtos[i].nome+'</h2>'
+                '<p>'+produtos[i].descricao + '</p>'
+                '<p>R$' + produtos[i].preco.toFixed(2) + '</p>'
+    }
+}
+
+
+// function gerarFakes(){
+
+//     let produto 
+//      produto = {
+
+//         nome: "w",
+//         descricao: 'w',
+//         preco: 22
+        
+
+// }
+
+// produtos.push(produto)
+
+//      produto = {
+
+//         nome: "q",
+//         descricao: 'q',
+//         preco: 23
+        
+
+// }
+
+// produtos.push(produto)
+
+//      produto = {
+
+//         nome: "e",
+//         descricao: 'e',
+//         preco: 24
+        
+
+// }
+// produtos.push(produto)
+        
+
+// }
+
+function limparFormulario(){
+
+    nome.value = ''
+    descricao.value = ''
+    preco.value = ''
+    nome.focus()
+
+}
+
+function salvar(){
+
+    produtos[encontrado].nome = nome.value
+    produtos[encontrado].descricao = descricao.value
+    produtos[encontrado].preco = Number(preco.value)
+    alert("Produto alterado com sucesso!")
+    limparFormulario()
+    localStorage.setItem("produtos", JSON.stringify(produtos))
+
+}
+
+function deletar(){
+    if(encontrado != -1){
+
+        produtos.splice(encontrado,1);
+        limparFormulario()
+        alert("Produto removido com sucesso.")
+        encontrado = -1
+        localStorage.setItem("produtos", JSON.stringify(produtos))
+
+    }else{
+
+        alert("Pesquisa nao foi efetuada.")
+
+    }
+
+
+}
+function lista(){
+
+
+
+}
+function crudProdutos(){
+
+    window.location.href = "card.html"
+
+}
+
 
 function existe(usuario, bancoDeDados){
     for(let verificado of bancoDeDados){
@@ -68,4 +213,31 @@ function existe(usuario, bancoDeDados){
 function entrar(){
     window.location.href = "home.html"
 }
+function cadastre(){
+    window.location.href = "registrar.html"
+}
+function voltar(){
+
+    window.location.href = "index.html"
+
+}
+
+function pesquisar(){
+
+    let pesquisa = nome.value
+    for(i = 0; i<produtos.length; i++){
+        console.log(produtos[i].nome)
+        if(produtos[i].nome == pesquisa){
+           
+            descricao.value = produtos[i].descricao
+            preco.value = produtos[i].preco
+            encontrado = i
+
+        }
+    }
+
+    console.log(pesquisa);
+    
+}
+
 

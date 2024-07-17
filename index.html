@@ -2,7 +2,9 @@
 <html lang="pt-br">
 
 <head>
+    <link rel="stylesheet" href="botstrap.css">
     <link rel="stylesheet" href="style.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -11,10 +13,46 @@
 <body>
     <div class="container">
         <div class="cabecalho">
-            <img id="logo" src="Logo.png" alt="Imagem da logo">
-            <input type="text" placeholder="Pesquisar" id="pesquisar">
-            <button id="entrar" onclick="entrar()">Logar</button>
+            <img id="logoIndex" src="assets/Logo1.png" alt="Imagem da logo">
+            <div class="pesquisar">
+
+              <input type="text" placeholder="O que procuras para hoje..." id="pesquisarIndex" required>
+              <button id="pesquisarHome" onclick="pesquisar()"><img id="iconPesquisarIndex" src="assets/lets-icons--search-light.svg" alt=""></button>
+
+            </div>
+            
+            <div class="botaoIndex">
+              <button id="entrar" onclick="entrar()">Logar</button>
+              <button id="crud" onclick="crudProdutos()">Cadastrar Produtos</button>
+
+            </div>
         </div>
+        <div class="card">
+            
+            <div id="card-body">
+              <h3 class="card-title">Box de Vidro blindex</h3>
+              <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+            <ul class="listaCard">
+              <li class="list-group-item">Cras justo odio</li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+              <button class="card-link">Fazer orçamento</button>
+            </div>
+
+              <div id="card-body">
+                <h3 class="card-title">Vidro temperado</h3>
+                <p class="card-text">Um vidro mais resistente utilizado para carros</p>
+              <ul class="listaCard">
+                <li class="list-group-item">Resiste impactos</li>
+                <li class="list-group-item">Não quebra</li>
+                <li class="list-group-item">Barato</li>
+              </ul>
+              <button class="card-link">Fazer orçamento</button>
+              
+            </div>
+          
+        
     </div>
     <script src="script.js"></script>
 </body>

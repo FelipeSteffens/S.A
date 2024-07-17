@@ -1,0 +1,123 @@
+#logoLogin{
+    
+    width: 180px;
+    margin-left: 15px;
+
+}
+.pesquisar{
+    position: absolute;
+
+    left: 39%;
+    top: 6%;
+
+}
+.cabecalho{
+    
+    background-color: #636262;
+    border-radius: 7px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+button{
+    
+    background-color: #4caf50;
+    color: azure;
+    border: none;
+    border-radius: 7px;
+    padding: 7px;
+    cursor: pointer;
+
+}
+#pesquisarIndex{
+
+    width: 26vw;
+    height: 3vh;
+    border-radius: 4px;
+    padding: 5px;
+    border: none;
+    box-shadow: 2px 2px 2px  rgb(49, 48, 48) ;
+}
+#pesquisarHome{
+    position: relative;
+    background-color: #636262;
+    border: #fff;
+    top: 5px;
+
+}
+#iconPesquisarIndex{
+    width:25px;
+}
+
+#textlogin{
+    font-size: 70px;
+    filter: blur(0.5px);
+    color: white;
+    border-radius: 15px;
+    background-image: url("assets/unnamed.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 70vw;
+    height: 15.8vh;
+    padding: 100px;
+    display: flex;
+    justify-content: center;    
+}
+.imgHome{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+
+}
+
+.login{
+
+    width: 20vw;
+    box-shadow: #000000;
+    border: 1px solid rgb(70, 71, 72);
+    border-radius: 10px;
+    padding: 15px;
+    margin-left: 23%;
+    font-size: 20px;
+    
+    text-align: center;
+    
+}
+
+input{
+
+    padding: 5px;
+    border-radius: 4px;
+    border-color: #0c0c0c;
+    border: none;
+    box-shadow: 2px 2px  2px 1px #575757;
+    
+}
+
+.registrar{
+    width: 15vw;
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    
+    font-size: 20px;
+    text-align: center;
+    margin-left: 50%;
+    transform: translateY(-200px) ;
+    
+}
+h4{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #636262;
+    font-size: 20px;
+}
+#cadastre{
+    width: 7vw;
+}
+#btnLogin{
+    width: 8vw;
+}

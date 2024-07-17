@@ -1,4 +1,4 @@
-#logoIndex{
+#logoLogin{
 
     width: 180px;
     margin-left: 15px;
@@ -45,16 +45,8 @@ button{
 
     width:25px;
     
-}
-.card{
-    border: 3px solid red;
-    display: inline-flex;
-    transform: translateY(40%);
 
 }
-#card-body{
-    width: 18vw;
-    height: 40vh;
-    border: 3px solid black;
-    display: flexbox;
+.imgHome{
+    background-image: ;
 }

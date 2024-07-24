@@ -22,13 +22,19 @@
 
 }
 button{
-    
-    background-color: #4caf50;
+
+    background-color: #007bff;
     color: azure;
     border: none;
     border-radius: 7px;
     padding: 7px;
     cursor: pointer;
+    transition: backgroud-color 0.3s;
+
+}
+button:hover{
+
+    background-color: #0056b3;
 
 }
 #pesquisarIndex{
@@ -54,6 +60,7 @@ button{
 #textlogin{
     font-size: 70px;
     filter: blur(0.5px);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: white;
     border-radius: 15px;
     background-image: url("assets/unnamed.jpg");

@@ -5,42 +5,49 @@ const campoNovaSenha = document.getElementById("newSenha")
 const campoRepSenha = document.getElementById("confirmSenha")
 const campoEmail = document.getElementById("newEmail")
 const painel = document.getElementById('painel')
+const inputIndex = document.getElementById("pesquisarIndex")
+let filtro = []
 
 
-
-function login(){           
+function login() {
     let login = campoLogin.value
     let senha = campoSenha.value
 
     let mensagem = "Nenhum usuário cadastrado até o momento";
     let bancoDeDados = JSON.parse(localStorage.getItem("bancoDeDados"))
-    if (bancoDeDados == null){
+    if (bancoDeDados == null) {
         mensagem = "Usuário ou senha incorreta! "
     }
-    else{
-        for(let usuario of bancoDeDados){
-            if(usuario.login == login && usuario.senha == senha){
+    if (login.value == "Admin_123" && senha.value == "123") {
+
+        mensagem = "Login Admin correto"
+        window.location.href("index.html")
+
+    }
+    else {
+        for (let usuario of bancoDeDados) {
+            if (usuario.login == login && usuario.senha == senha) {
                 mensagem = "Parabéns, você logou!"
                 localStorage.setItem("logado", JSON.stringify(usuario))
-                window.location.href = "index.html"
+                window.location.href = "logado.html"
                 break
 
             }
         }
     }
     alert(mensagem)
-    form.reset(); 
+    form.reset();
 }
 
-function cadastro(){
+function cadastro() {
 
-    if(campoNovoLogin.value == "" || campoNovaSenha.value == "" || campoEmail.value == "" || campoRepSenha.value == ""){
+    if (campoNovoLogin.value == "" || campoNovaSenha.value == "" || campoEmail.value == "" || campoRepSenha.value == "") {
 
         alert("Você não preencheu os dados solicitados!");
         return
 
     }
-    if (campoNovaSenha.value == campoRepSenha.value){
+    if (campoNovaSenha.value == campoRepSenha.value) {
         const usuario = {
 
             email: campoEmail.value,
@@ -49,56 +56,65 @@ function cadastro(){
 
         };
 
-    let bancoDeDados = JSON.parse(localStorage.getItem("bancoDeDados"))
-    if(bancoDeDados == null){
-        bancoDeDados = [];
-    }
-    if(existe(usuario, bancoDeDados)){
-        alert("Esse login ja está cadastrado!")
-        window.location.href = "home.html"  
-    }
-    else{
-        bancoDeDados.push(usuario)
-        localStorage.setItem("bancoDeDados", JSON.stringify(bancoDeDados))
-        alert("Usuário cadastrado com sucesso!")
-        window.location.href = "index.html"
-    }
-    }else{
-    alert("As senhas não são iguais!")
+        let bancoDeDados = JSON.parse(localStorage.getItem("bancoDeDados"))
+        if (bancoDeDados == null) {
+            bancoDeDados = [];
+        }
+        if (existe(usuario, bancoDeDados)) {
+            alert("Esse login ja está cadastrado!")
+        }
+        else {
+            bancoDeDados.push(usuario)
+            localStorage.setItem("bancoDeDados", JSON.stringify(bancoDeDados))
+            alert("Usuário cadastrado com sucesso!")
+            window.location.href = "logado.html"
+        }
+    } else {
+        alert("As senhas não são iguais!")
     }
     localStorage.clear(bancoDeDados);
 }
 let nome = document.getElementById('productName')
 let descricao = document.getElementById('productDescription')
-let preco = document.getElementById('productPrice')
+let imagem = document.getElementById('productImg')
+
 
 let produtos = JSON.parse(localStorage.getItem("produtos")) || []
 let encontrado = -1
+let path = "";
 
-function cadastrar(){
+function cadastrar() {
+    
+    const [file] = imagem.files
+
+    if (file) {
+      path = URL.createObjectURL(file)
+    }
+
     let produto = {
+        id: Date.now(),
         nome: nome.value,
         descricao: descricao.value,
-        preco: Number(preco.value)
+        imagem: path
     }
-        produtos.push(produto) 
-        console.log(produtos);
-        limparFormulario()
+    produtos.push(produto)
+    console.log(produtos);
+    limparFormulario()
 
-        localStorage.setItem("produtos", JSON.stringify(produtos))
-        alert("Produto Cadastrado com sucesso")
-    
+    localStorage.setItem("produtos", JSON.stringify(produtos))
+    alert("Produto Cadastrado com sucesso")
+
 }
 
-function pesquisar(){
+function pesquisar() {
     let pesquisa = nome.value
-    for(i=0;i<produtos.length;i++){
+    for (i = 0; i < produtos.length; i++) {
         console.log(produtos[i].nome)
         // testar se é o certo
-        if(produtos[i].nome == pesquisa){
-           
+        if (produtos[i].nome == pesquisa) {
+
             descricao.value = produtos[i].descricao
-            preco.value = produtos[i].preco
+            imagem.value = produtos[i].imagem
             encontrado = i
 
         }
@@ -106,84 +122,45 @@ function pesquisar(){
 
     console.log(pesquisa);
 }
-function lista(){
+function lista() {
     painel.innerHTML = ''
-    for(i=0; i<produtos.length; i++){
-        painel.innerHTML += '<h2>'+produtos[i].nome+'</h2>'
-                '<p>'+produtos[i].descricao + '</p>'
-                '<p>R$' + produtos[i].preco.toFixed(2) + '</p>'
+    for (i = 0; i < produtos.length; i++) {
+        painel.innerHTML += '<h2>' + produtos[i].nome + '</h2>'
+        '<p>' + produtos[i].descricao + '</p>'
+        '<p>R$' + produtos[i].imagem + '</p>'
     }
 }
 
-
-// function gerarFakes(){
-
-//     let produto 
-//      produto = {
-
-//         nome: "w",
-//         descricao: 'w',
-//         preco: 22
-        
-
-// }
-
-// produtos.push(produto)
-
-//      produto = {
-
-//         nome: "q",
-//         descricao: 'q',
-//         preco: 23
-        
-
-// }
-
-// produtos.push(produto)
-
-//      produto = {
-
-//         nome: "e",
-//         descricao: 'e',
-//         preco: 24
-        
-
-// }
-// produtos.push(produto)
-        
-
-// }
-
-function limparFormulario(){
+function limparFormulario() {
 
     nome.value = ''
     descricao.value = ''
-    preco.value = ''
+    imagem.value = ''
     nome.focus()
 
 }
 
-function salvar(){
+function salvar() {
 
     produtos[encontrado].nome = nome.value
     produtos[encontrado].descricao = descricao.value
-    produtos[encontrado].preco = Number(preco.value)
+    produtos[encontrado].imagem = imagem.value
     alert("Produto alterado com sucesso!")
     limparFormulario()
     localStorage.setItem("produtos", JSON.stringify(produtos))
 
 }
 
-function deletar(){
-    if(encontrado != -1){
+function deletar() {
+    if (encontrado != -1) {
 
-        produtos.splice(encontrado,1);
+        produtos.splice(encontrado, 1);
         limparFormulario()
         alert("Produto removido com sucesso.")
         encontrado = -1
         localStorage.setItem("produtos", JSON.stringify(produtos))
 
-    }else{
+    } else {
 
         alert("Pesquisa nao foi efetuada.")
 
@@ -191,53 +168,86 @@ function deletar(){
 
 
 }
-function lista(){
-
-
+function lista() {
 
 }
-function crudProdutos(){
+function crudProdutos() {
 
     window.location.href = "card.html"
 
 }
 
-
-function existe(usuario, bancoDeDados){
-    for(let verificado of bancoDeDados){
-        if(verificado.login == usuario.login)
-        return true
+function existe(usuario, bancoDeDados) {
+    for (let verificado of bancoDeDados) {
+        if (verificado.login == usuario.login)
+            return true
     }
 }
 
-function entrar(){
+function entrar() {
     window.location.href = "home.html"
 }
-function cadastre(){
+function cadastre() {
     window.location.href = "registrar.html"
 }
-function voltar(){
+function voltar() {
 
     window.location.href = "index.html"
 
 }
 
-function pesquisar(){
+function pesquisar() {
 
     let pesquisa = nome.value
-    for(i = 0; i<produtos.length; i++){
+    for (i = 0; i < produtos.length; i++) {
         console.log(produtos[i].nome)
-        if(produtos[i].nome == pesquisa){
-           
+        if (produtos[i].nome == pesquisa) {
+
             descricao.value = produtos[i].descricao
-            preco.value = produtos[i].preco
+            imagem.value = produtos[i].imagem
             encontrado = i
 
         }
     }
 
     console.log(pesquisa);
-    
+
+}
+
+function mostrarCardsHome() {
+    let cards = document.getElementById('cards')
+
+    //cards.innerHTML = '';
+    for (i = 0; i < filtro.length; i++) {
+        cards.innerHTML += `
+        <div class="card-body" onclick="cadastre()">
+              <img src="${filtro[i].imagem}" alt="imagem">
+              <h3 class="card-title">${filtro[i].nome}</h3>
+              <p class="card-text">${filtro[i].descricao}</p>
+              
+        </div>
+        
+        `
+
+    }
 }
 
 
+
+function filtrar() {
+
+    filtro = []
+
+    for (i = 0; i < produtos.length; i++) {
+        if (produtos[i].nome.toUpperCase().includes(inputIndex.value.toUpperCase())) {
+
+            filtro.push(produtos[i])
+
+        }
+    }
+
+    mostrarCardsHome()
+}
+
+filtro = produtos
+mostrarCardsHome()

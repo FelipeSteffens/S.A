@@ -16,12 +16,18 @@
 }
 button{
 
-    background-color: #4caf50;
+    background-color: #007bff;
     color: azure;
     border: none;
     border-radius: 7px;
     padding: 7px;
     cursor: pointer;
+    transition: backgroud-color 0.3s;
+
+}
+button:hover{
+
+    background-color: #0056b3;
 
 }
 #pesquisarIndex{
@@ -46,15 +52,95 @@ button{
     width:25px;
     
 }
-.card{
-    border: 3px solid red;
-    display: inline-flex;
-    transform: translateY(40%);
+.cards{
+    margin-top: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    /* transform: translateY(40%); */
+    
+    justify-content: space-around;
+    gap: 70px;
 
 }
-#card-body{
-    width: 18vw;
-    height: 40vh;
-    border: 3px solid black;
+
+.card-body{
+    width: 17vw;
+    height: 55vh;
+    padding-left: 15px;
     display: flexbox;
+    border: none;
+    border-radius: 4px;
+    border: 1px solid #999999;
+    max-width: 17vw;
+    box-shadow: 2px 2px  2px 1px #999999;
+    
+
 }
+.card-body:hover{
+    
+        background-color: #f0f0f0;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transform: translateY(-5px);
+      
+    
+}
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .card-text {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 15px;
+  }
+
+  
+  .listaCard {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 15px;
+  }
+
+ 
+  .listaCard li {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  #imgbox{
+
+    height: 200px;
+    width: 140px;
+    margin-top: 10px;
+    transform: translateX(40px);
+    
+
+  }
+  
+  /* Estilos para o botão */
+  .card-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  /* Estilos para o botão quando hover */
+  .card-link:hover {
+    background-color: #0056b3;
+  }
+
+  h1{
+    text-align: center;
+    color: #afa8a8; 
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-top: 40px;
+  }

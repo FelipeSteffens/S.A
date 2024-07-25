@@ -1,13 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
+    <link rel="stylesheet" href="orcamento.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <div class="">
+<body onload="gerarselecoes()">
+    <div class="cabecalho">
+        <img id="logoIndex" src="assets/Logo1.png" alt="Imagem da logo">
+        <div class="pesquisar">
+        
+          <input type="search" placeholder="O que procuras para hoje..." id="pesquisarIndex" required>
+          <button id="pesquisarHome" onclick="filtrar()"><img id="iconPesquisarIndex" src="assets/lets-icons--search-light.svg" alt=""></button>
+        
+        </div>
+        
+        <div class="botaoIndex">
+          <button id="entrar" onclick="entrar()">Logar</button>
+          <button id="crud" onclick="crudProdutos()">Cadastrar Produtos</button>
+        
+        </div>
+        </div>
+        
+    <div id="opcao">
+    <label for="opcoes">Escolha um tipo de serviço: </label>
+    <select name="" id="opcoes" onchange="gerarselecoes()">
+        <!-- <option value="1"></option>
+        <option value="2"></option> -->
+    </select>
+    <label for="tamanho">Digite o tamanho em m²: </label>
+    <input type="number" id="tamanho">
 
-    </div>
+    <button onclick="fazerocamento()">Fazer orçamento</button>
+</div>
+
+    
+    
 </body>
+<script src="script.js"></script>
 </html>

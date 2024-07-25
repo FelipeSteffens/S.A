@@ -9,6 +9,7 @@ const inputIndex = document.getElementById("pesquisarIndex")
 let filtro = []
 
 
+
 function login() {
     let login = campoLogin.value
     let senha = campoSenha.value
@@ -18,12 +19,7 @@ function login() {
     if (bancoDeDados == null) {
         mensagem = "Usuário ou senha incorreta! "
     }
-    if (login.value == "Admin_123" && senha.value == "123") {
-
-        mensagem = "Login Admin correto"
-        window.location.href("index.html")
-
-    }
+    
     else {
         for (let usuario of bancoDeDados) {
             if (usuario.login == login && usuario.senha == senha) {
@@ -195,6 +191,11 @@ function voltar() {
     window.location.href = "index.html"
 
 }
+function orcamento(){
+
+    window.location.href = 'orçamento.html'
+    
+}
 
 function pesquisar() {
 
@@ -217,10 +218,11 @@ function pesquisar() {
 function mostrarCardsHome() {
     let cards = document.getElementById('cards')
 
-    //cards.innerHTML = '';
+    cards.innerHTML = '';
     for (i = 0; i < filtro.length; i++) {
+    
         cards.innerHTML += `
-        <div class="card-body" onclick="cadastre()">
+        <div class="card-body" onclick="orcamento()">
               <img src="${filtro[i].imagem}" alt="imagem">
               <h3 class="card-title">${filtro[i].nome}</h3>
               <p class="card-text">${filtro[i].descricao}</p>
@@ -239,7 +241,7 @@ function filtrar() {
     filtro = []
 
     for (i = 0; i < produtos.length; i++) {
-        if (produtos[i].nome.toUpperCase().includes(inputIndex.value.toUpperCase())) {
+        if (produtos[i].nome.toLowerCase().includes(inputIndex.value.toLowerCase())) {
 
             filtro.push(produtos[i])
 
@@ -250,4 +252,21 @@ function filtrar() {
 }
 
 filtro = produtos
+
 mostrarCardsHome()
+
+
+
+function gerarselecoes(){
+    let opcoes = document.getElementById('opcoes')
+    opcoes.innerHTML = ''
+
+    for(i = 0; i < filtro.length; i++){
+        opcoes.innerHTML += `
+        
+        <option value="${i}">${filtro[i].nome}</option><br>
+        `
+        
+        
+    }
+}

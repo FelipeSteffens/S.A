@@ -16,12 +16,12 @@
 
 }
 
-#pesquisarIndex{
+#pesquisarOrcamento{
 
     width: 26vw;
     height: 3vh;
     border-radius: 4px;
-    padding: 5px;
+    padding: 16px;
     border: none;
     box-shadow: 2px 2px 2px  rgb(49, 48, 48) ;
 
@@ -35,9 +35,10 @@
 
 }
 
-#iconPesquisarIndex{
+#iconPesquisarOrçamento{
 
-    width:25px;
+    width:35px;
+    height: 35px;
     
 }
 
@@ -62,13 +63,21 @@ button:hover{
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 300px;
+    border-color: #000000;
+    transform: translateX(150%);
+    margin-top: 120px;
 }
 
 label {
     display: block;
     margin-bottom: 8px;
     color: #333;
+}
+#entrarOrcamento{
+
+    width: 65px;
+
 }

@@ -6,16 +6,31 @@ const campoRepSenha = document.getElementById("confirmSenha")
 const campoEmail = document.getElementById("newEmail")
 const painel = document.getElementById('painel')
 const inputIndex = document.getElementById("pesquisarIndex")
+const largura = document.getElementById("tamanhoA")
+const comprimento = document.getElementById("tamanhoB")
 let filtro = []
+let nome = document.getElementById('productName')
+let descricao = document.getElementById('productDescription')
+let imagem = document.getElementById('productImg')
+
+
+let produtos = JSON.parse(localStorage.getItem("produtos")) || []
+let encontrado = -1
+let path = '';
 
 
 
 function login() {
     let login = campoLogin.value
     let senha = campoSenha.value
+    let admin = {
+            login: 'admin',
+            senha: '123'
+    }
 
     let mensagem = "Nenhum usuário cadastrado até o momento";
     let bancoDeDados = JSON.parse(localStorage.getItem("bancoDeDados"))
+
     if (bancoDeDados == null) {
         mensagem = "Usuário ou senha incorreta! "
     }
@@ -70,54 +85,68 @@ function cadastro() {
     }
     localStorage.clear(bancoDeDados);
 }
-let nome = document.getElementById('productName')
-let descricao = document.getElementById('productDescription')
-let imagem = document.getElementById('productImg')
-
-
-let produtos = JSON.parse(localStorage.getItem("produtos")) || []
-let encontrado = -1
-let path = "";
 
 function cadastrar() {
-    
-    const [file] = imagem.files
+    const [file] = imagem.files; 
 
     if (file) {
-      path = URL.createObjectURL(file)
+       
+        const reader = new FileReader();
+        
+        
+        reader.onloadend = function () {
+            const path = reader.result;
+
+            let produto = {
+                id: Date.now(),
+                nome: nome.value,
+                descricao: descricao.value,
+                imagem: path
+            };
+
+            produtos.push(produto);
+            console.log(produtos);
+            limparFormulario();
+
+            localStorage.setItem("produtos", JSON.stringify(produtos));
+            alert("Produto Cadastrado com sucesso");
+        };
+
+       
+        reader.readAsDataURL(file);
+    } else {
+        alert("Nenhuma imagem selecionada.");
     }
-
-    let produto = {
-        id: Date.now(),
-        nome: nome.value,
-        descricao: descricao.value,
-        imagem: path
-    }
-    produtos.push(produto)
-    console.log(produtos);
-    limparFormulario()
-
-    localStorage.setItem("produtos", JSON.stringify(produtos))
-    alert("Produto Cadastrado com sucesso")
-
 }
 
 function pesquisar() {
-    let pesquisa = nome.value
-    for (i = 0; i < produtos.length; i++) {
-        console.log(produtos[i].nome)
-        // testar se é o certo
-        if (produtos[i].nome == pesquisa) {
 
-            descricao.value = produtos[i].descricao
-            imagem.value = produtos[i].imagem
+    let pesquisa = document.getElementById("productName").value.trim()
+    encontrado = -1
+
+    for (let i = 0; i < produtos.length; i++) {
+        
+
+        
+        if (produtos[i].nome.toLowerCase() === pesquisa.toLowerCase()) {
+
+            document.getElementById('productDescription').value = produtos[i].descricao
+            document.getElementById('productImg').file = produtos[i].imagem
             encontrado = i
 
+
+            break;
         }
     }
 
+    if (encontrado == -1) {
+        alert('Produto não encontrado');
+    }
     console.log(pesquisa);
+
 }
+
+
 function lista() {
     painel.innerHTML = ''
     for (i = 0; i < produtos.length; i++) {
@@ -140,21 +169,21 @@ function salvar() {
 
     produtos[encontrado].nome = nome.value
     produtos[encontrado].descricao = descricao.value
-    produtos[encontrado].imagem = imagem.value
     alert("Produto alterado com sucesso!")
-    limparFormulario()
     localStorage.setItem("produtos", JSON.stringify(produtos))
+    limparFormulario()
+    
 
 }
 
 function deletar() {
-    if (encontrado != -1) {
-
-        produtos.splice(encontrado, 1);
-        limparFormulario()
-        alert("Produto removido com sucesso.")
-        encontrado = -1
-        localStorage.setItem("produtos", JSON.stringify(produtos))
+    if (encontrado != -1) { 
+        produtos.splice(encontrado, 1); 
+        localStorage.setItem("produtos", JSON.stringify(produtos));
+        document.getElementById('productDescription').value = ''; 
+        document.getElementById('productImg').file = '';
+        encontrado = -1; 
+        alert("Produto removido com sucesso.");
 
     } else {
 
@@ -164,9 +193,7 @@ function deletar() {
 
 
 }
-function lista() {
 
-}
 function crudProdutos() {
 
     window.location.href = "card.html"
@@ -194,24 +221,6 @@ function voltar() {
 function orcamento(){
 
     window.location.href = 'orçamento.html'
-    
-}
-
-function pesquisar() {
-
-    let pesquisa = nome.value
-    for (i = 0; i < produtos.length; i++) {
-        console.log(produtos[i].nome)
-        if (produtos[i].nome == pesquisa) {
-
-            descricao.value = produtos[i].descricao
-            imagem.value = produtos[i].imagem
-            encontrado = i
-
-        }
-    }
-
-    console.log(pesquisa);
 
 }
 
@@ -223,7 +232,7 @@ function mostrarCardsHome() {
     
         cards.innerHTML += `
         <div class="card-body" onclick="orcamento()">
-              <img src="${filtro[i].imagem}" alt="imagem">
+               <img src="${filtro[i].imagem}" alt="imagem">
               <h3 class="card-title">${filtro[i].nome}</h3>
               <p class="card-text">${filtro[i].descricao}</p>
               
@@ -233,8 +242,6 @@ function mostrarCardsHome() {
 
     }
 }
-
-
 
 function filtrar() {
 
@@ -266,7 +273,14 @@ function gerarselecoes(){
         
         <option value="${i}">${filtro[i].nome}</option><br>
         `
-        
-        
     }
+    }
+
+function fazerOrcamento(){
+
+    largura = Number(input)
+
 }
+ 
+
+

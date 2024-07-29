@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Glass Vision</h1>
+        <img id="logoCrudProdutos" src="assets/Logo.png" alt="Imagem" srcset="">
         <div class="input-group">
             <label for="productName">Nome do Serviço</label>
             <input type="text" id="productName" name="productName">
@@ -19,7 +19,7 @@
         </div>
         <div class="input-group">
             <label for="productImg">Imagem do Serviço</label>
-            <input type="file" id="productImg" name="productImg">
+            <input type="file" id="productImg" name="productImg" accept="image/*">
             <img src="" alt="">
         </div>
         <div class="buttons">
@@ -27,8 +27,6 @@
             <button id="readButton" onclick="pesquisar()">Pesquisar</button>
             <button id="updateButton" onclick="salvar()">Editar</button>
             <button id="deleteButton" onclick="deletar()">Deletar</button>
-            <!-- <button id="fakesButton" onclick="gerarFakes()">Fakes</button> -->
-            <button id="listaButton" onclick="lista()">Mostrar tudo</button>
             <button id="voltarButton" onclick="voltar()">Voltar</button>
         </div>
         <div class="painel"></div>

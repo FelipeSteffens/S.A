@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <link rel="stylesheet" href="perfil.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil do Usuário</title>
-    <link rel="stylesheet" href="perfil.css">
+    <title>Perfil</title>
 </head>
-<body>
+<body onload="informacaoPerfil()">
+
     <div class="profile-container">
-        <header>
-            <h1>Perfil do Usuário</h1>
-        </header>
-        <section class="profile-info">
-            <img src="assets/codicon--account.png" alt="Avatar do Usuário" class="avatar">
-            <div class="info">
-                <p><strong>Nome:</strong> João Silva</p>
-                <p><strong>Email:</strong> joao.silva@example.com</p>
-                <p><strong>Data de Nascimento:</strong> 15/08/1990</p>
-                <p><strong>Endereço:</strong> Rua Exemplo, 123, São Paulo, SP</p>
-            </div>
-            <a href="editar-perfil.html" class="edit-button">Editar Informações</a>
-        </section>
+    <header>
+    <h1>Perfil do Usuário</h1>
+    </header>
+    <section class="profile-info">
+        <img src="assets/codicon--account.png" alt="Avatar do Usuário" class="avatar">  
+    <div class="info" id="info">
+        
+        
+    </div>    
+    <a href="editar-perfil.html" class="edit-button">Editar Informações</a>
+    </section>   
     </div>
+    <script src="script.js"></script>
 </body>
 </html>

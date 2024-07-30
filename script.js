@@ -18,7 +18,7 @@ let produtos = JSON.parse(localStorage.getItem("produtos")) || []
 let encontrado = -1
 let path = '';
 
-
+let perfilUsuario = []
 
 function login() {
     let login = campoLogin.value
@@ -86,7 +86,6 @@ function cadastro() {
     } else {
         alert("As senhas não são iguais!")
     }
-    localStorage.clear(bancoDeDados);
 }
 
 function cadastrar() {
@@ -305,5 +304,31 @@ function deslogar(){
 }
 
 function editarPerfil(){
+    
     window.location.href = "perfil.html"
+}
+
+
+function informacaoPerfil() {
+    
+    perfilUsuario = JSON.parse(localStorage.getItem('bancoDeDados'))
+    const usuarioLogado = JSON.parse(localStorage.getItem('logado'));
+    let informacao = document.getElementById('info');
+
+    informacao.innerHTML = '';
+    
+        
+    if (usuarioLogado) {
+        
+        const usuario = perfilUsuario.find(user => user.login === usuarioLogado.login);
+
+        if (usuario) {
+            informacao.innerHTML = `
+                <p><strong>Nome:</strong> ${usuario.login}</p>
+                <p><strong>Email:</strong> ${usuario.email}</p>
+                <p><strong>Data de Nascimento:</strong> ${usuario.nascimento || 'Não informado'}</p>
+                <p><strong>Endereço:</strong> ${usuario.endereço || 'Não informado'}</p>
+            `;
+        }
+}
 }

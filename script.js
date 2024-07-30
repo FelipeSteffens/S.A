@@ -12,7 +12,7 @@ let filtro = []
 let nome = document.getElementById('productName')
 let descricao = document.getElementById('productDescription')
 let imagem = document.getElementById('productImg')
-
+let multiplicação = Number("0")
 
 let produtos = JSON.parse(localStorage.getItem("produtos")) || []
 let encontrado = -1
@@ -23,10 +23,7 @@ let path = '';
 function login() {
     let login = campoLogin.value
     let senha = campoSenha.value
-    let admin = {
-            login: 'admin',
-            senha: '123'
-    }
+    
 
     let mensagem = "Nenhum usuário cadastrado até o momento";
     let bancoDeDados = JSON.parse(localStorage.getItem("bancoDeDados"))
@@ -37,6 +34,12 @@ function login() {
     
     else {
         for (let usuario of bancoDeDados) {
+            if(usuario.login == "admin_glassvision" && usuario.senha == "123"){
+                mensagem = "Usuario admin logado!"
+                localStorage.setItem("logado", JSON.stringify(usuario))
+                window.location.href = "loginadm.html"
+                break
+            }
             if (usuario.login == login && usuario.senha == senha) {
                 mensagem = "Parabéns, você logou!"
                 localStorage.setItem("logado", JSON.stringify(usuario))
@@ -103,13 +106,15 @@ function cadastrar() {
                 descricao: descricao.value,
                 imagem: path
             };
-
+            let confirmar = confirm("Você deseja cadastrar este produto?");
+            if(confirmar){
             produtos.push(produto);
             console.log(produtos);
             limparFormulario();
 
             localStorage.setItem("produtos", JSON.stringify(produtos));
             alert("Produto Cadastrado com sucesso");
+        }
         };
 
        
@@ -166,24 +171,31 @@ function limparFormulario() {
 }
 
 function salvar() {
+    let confirmar = confirm("Você realmente deseja editar este produto?");
 
+    if(confirmar){
     produtos[encontrado].nome = nome.value
     produtos[encontrado].descricao = descricao.value
     alert("Produto alterado com sucesso!")
     localStorage.setItem("produtos", JSON.stringify(produtos))
     limparFormulario()
-    
+    }
 
 }
 
 function deletar() {
     if (encontrado != -1) { 
+
+        let confirmar = confirm("Você realmente deseja excluir este produto?");
+
+        if(confirmar){
         produtos.splice(encontrado, 1); 
         localStorage.setItem("produtos", JSON.stringify(produtos));
         document.getElementById('productDescription').value = ''; 
         document.getElementById('productImg').file = '';
         encontrado = -1; 
         alert("Produto removido com sucesso.");
+    }
 
     } else {
 
@@ -213,14 +225,25 @@ function entrar() {
 function cadastre() {
     window.location.href = "registrar.html"
 }
-function voltar() {
+function voltarAdm() {
 
-    window.location.href = "index.html"
+    window.location.href = "loginadm.html"
+
+}
+function voltar(){
+
+    window.location.href = "logado.html"
 
 }
 function orcamento(){
-
-    window.location.href = 'orçamento.html'
+    let usuarioLogado = JSON.parse(localStorage.getItem("logado"))
+    console.log(usuarioLogado)
+    if(usuarioLogado != null){
+        window.location.href = 'orçamento.html'
+    }
+    else{
+        window.location.href = 'home.html'
+    }
 
 }
 
@@ -276,11 +299,11 @@ function gerarselecoes(){
     }
     }
 
-function fazerOrcamento(){
-
-    largura = Number(input)
-
+function deslogar(){
+    alert("Você foi deslogado!")
+    window.location.href = "index.html"
 }
- 
 
-
+function editarPerfil(){
+    window.location.href = "perfil.html"
+}

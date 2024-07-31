@@ -22,6 +22,8 @@ let perfilUsuario = []
 function login() {
     let login = campoLogin.value
     let senha = campoSenha.value
+    let loginAdm = "admin_glassvision"
+    let senhaAdm = "123"
 
 
     let mensagem = "Nenhum usuário cadastrado até o momento";
@@ -33,7 +35,7 @@ function login() {
 
     else {
         for (let usuario of bancoDeDados) {
-            if (usuario.login == "admin_glassvision" && usuario.senha == "123") {
+            if (loginAdm == login && senhaAdm == senha) {
                 mensagem = "Usuario admin logado!"
                 localStorage.setItem("logado", JSON.stringify(usuario))
                 window.location.href = "loginadm.html"
@@ -233,16 +235,22 @@ function voltar() {
     window.location.href = "logado.html"
 
 }
+function voltarIndex(){
+    window.location.href = "index.html"
+}
 function orcamento() {
-    let usuarioLogado = JSON.parse(localStorage.getItem("logado"))
-    console.log(usuarioLogado)
-    if (usuarioLogado != null) {
-        window.location.href = 'orçamento.html'
-    }
-    else {
-        window.location.href = 'home.html'
-    }
+    const HOME_URL = 'home.html';
+    const ORCAMENTO_URL = 'orçamento.html';
 
+   
+        const usuarioLogado = JSON.parse(localStorage.getItem("logado"));
+
+        // Verifica se usuarioLogado é null ou não definido
+        if (usuarioLogado === null || usuarioLogado === undefined) {
+            window.location.href = HOME_URL;
+        } else {
+            window.location.href = ORCAMENTO_URL;
+        }
 }
 function orcamentoAdm() {
 
@@ -295,6 +303,7 @@ mostrarCardsHome()
 
 function deslogar() {
     alert("Você foi deslogado!")
+    localStorage.removeItem("logado");
     window.location.href = "index.html"
 }
 
@@ -421,7 +430,7 @@ function salvarDados() {
 
 
             alert('Dados atualizados com sucesso!');
-
+            window.location.href = "logado.html"
 
         }
 

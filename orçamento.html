@@ -6,18 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body onload="gerarselecoes()">
-    <div class="cabecalho">
-        <img onclick="voltar()" id="logoIndex" src="assets/Logo1.png" alt="Imagem da logo">
-        <div class="pesquisar">
-        
-          <input type="search" placeholder="O que procuras para hoje..." id="pesquisarOrcamento" required>
-          <button id="iconPesquisarOrçamento" onclick="filtrar()"><img id="iconPesquisarIndex" src="assets/lets-icons--search-light.svg" alt=""></button>
-        
-        </div>
-        
-        
-        </div>
+<body>
+        <div class="cabecalho">
+            <img onclick="voltar()" id="logoIndex" src="assets/Logo1.png" alt="Imagem da logo">
+            <div class="pesquisar">
+
+              <input type="text" placeholder="O que procuras para hoje..." id="pesquisarIndex" required>
+              <button id="pesquisarHome" onclick="filtrar()"><img id="iconPesquisarIndex" src="assets/lets-icons--search-light.svg" alt=""></button>
+
+            </div>
+            </div>
         
     <div id="opcao">
     <label for="opcoes">Escolha um tipo de Vidro: </label>

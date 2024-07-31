@@ -7,7 +7,15 @@
     <title>Perfil</title>
 </head>
 <body onload="informacaoPerfil()">
+        <div class="cabecalho">
+            <img onclick="voltar()" id="logoIndex" src="assets/Logo1.png" alt="Imagem da logo">
+            <div class="pesquisar">
 
+              <input type="search" placeholder="O que procuras para hoje..." id="pesquisarIndex" required>
+              <button id="pesquisarHome" onclick="filtrar()"><img id="iconPesquisarIndex" src="assets/lets-icons--search-light.svg" alt=""></button>
+
+            </div>
+        </div>
     <div class="profile-container">
     <header>
     <h1>Perfil do Usuário</h1>

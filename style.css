@@ -35,7 +35,7 @@ button:hover{
     width: 26vw;
     height: 3vh;
     border-radius: 4px;
-    padding: 13px;
+    
     border: none;
     box-shadow: 2px 2px 2px  rgb(49, 48, 48) ;
 
@@ -52,6 +52,9 @@ button:hover{
 
     width:25px;
     
+}
+.pesquisar{
+  padding: 13px;
 }
 #cards{
     margin-top: 80px;

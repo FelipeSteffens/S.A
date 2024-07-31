@@ -245,8 +245,7 @@ function orcamento() {
    
         const usuarioLogado = JSON.parse(localStorage.getItem("logado"));
 
-        // Verifica se usuarioLogado é null ou não definido
-        if (usuarioLogado === null || usuarioLogado === undefined) {
+        if (usuarioLogado == null) {
             window.location.href = HOME_URL;
         } else {
             window.location.href = ORCAMENTO_URL;
@@ -472,9 +471,14 @@ function fazerOrcamento() {
 
         alert("selecione uma opção valida")
 
-    }
+    
 
     
-    alert("O valor total do orçamento é de: " + total)
+    document.getElementById("resultadoOrcamento").innerHTML = "Selecione uma opção válida.";
+            return; // Sai da função para não mostrar o resultado do orçamento
+    }
 
+    // Atualiza o conteúdo do elemento com o resultado do orçamento
+    document.getElementById("resultadoOrcamento").innerHTML = "O valor total do orçamento é de: R$ " + total.toFixed(2);
 }
+

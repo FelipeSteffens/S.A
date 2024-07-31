@@ -13,7 +13,6 @@ let nome = document.getElementById('productName')
 let descricao = document.getElementById('productDescription')
 let imagem = document.getElementById('productImg')
 let multiplicação = Number("0")
-
 let produtos = JSON.parse(localStorage.getItem("produtos")) || []
 let encontrado = -1
 let path = '';
@@ -23,7 +22,7 @@ let perfilUsuario = []
 function login() {
     let login = campoLogin.value
     let senha = campoSenha.value
-    
+
 
     let mensagem = "Nenhum usuário cadastrado até o momento";
     let bancoDeDados = JSON.parse(localStorage.getItem("bancoDeDados"))
@@ -31,10 +30,10 @@ function login() {
     if (bancoDeDados == null) {
         mensagem = "Usuário ou senha incorreta! "
     }
-    
+
     else {
         for (let usuario of bancoDeDados) {
-            if(usuario.login == "admin_glassvision" && usuario.senha == "123"){
+            if (usuario.login == "admin_glassvision" && usuario.senha == "123") {
                 mensagem = "Usuario admin logado!"
                 localStorage.setItem("logado", JSON.stringify(usuario))
                 window.location.href = "loginadm.html"
@@ -81,7 +80,7 @@ function cadastro() {
             bancoDeDados.push(usuario)
             localStorage.setItem("bancoDeDados", JSON.stringify(bancoDeDados))
             alert("Usuário cadastrado com sucesso!")
-            window.location.href = "logado.html"
+            window.location.href = "home.html"
         }
     } else {
         alert("As senhas não são iguais!")
@@ -89,13 +88,13 @@ function cadastro() {
 }
 
 function cadastrar() {
-    const [file] = imagem.files; 
+    const [file] = imagem.files;
 
     if (file) {
-       
+
         const reader = new FileReader();
-        
-        
+
+
         reader.onloadend = function () {
             const path = reader.result;
 
@@ -106,17 +105,17 @@ function cadastrar() {
                 imagem: path
             };
             let confirmar = confirm("Você deseja cadastrar este produto?");
-            if(confirmar){
-            produtos.push(produto);
-            console.log(produtos);
-            limparFormulario();
+            if (confirmar) {
+                produtos.push(produto);
+                console.log(produtos);
+                limparFormulario();
 
-            localStorage.setItem("produtos", JSON.stringify(produtos));
-            alert("Produto Cadastrado com sucesso");
-        }
+                localStorage.setItem("produtos", JSON.stringify(produtos));
+                alert("Produto Cadastrado com sucesso");
+            }
         };
 
-       
+
         reader.readAsDataURL(file);
     } else {
         alert("Nenhuma imagem selecionada.");
@@ -129,9 +128,9 @@ function pesquisar() {
     encontrado = -1
 
     for (let i = 0; i < produtos.length; i++) {
-        
 
-        
+
+
         if (produtos[i].nome.toLowerCase() === pesquisa.toLowerCase()) {
 
             document.getElementById('productDescription').value = produtos[i].descricao
@@ -172,29 +171,29 @@ function limparFormulario() {
 function salvar() {
     let confirmar = confirm("Você realmente deseja editar este produto?");
 
-    if(confirmar){
-    produtos[encontrado].nome = nome.value
-    produtos[encontrado].descricao = descricao.value
-    alert("Produto alterado com sucesso!")
-    localStorage.setItem("produtos", JSON.stringify(produtos))
-    limparFormulario()
+    if (confirmar) {
+        produtos[encontrado].nome = nome.value
+        produtos[encontrado].descricao = descricao.value
+        alert("Produto alterado com sucesso!")
+        localStorage.setItem("produtos", JSON.stringify(produtos))
+        limparFormulario()
     }
 
 }
 
 function deletar() {
-    if (encontrado != -1) { 
+    if (encontrado != -1) {
 
         let confirmar = confirm("Você realmente deseja excluir este produto?");
 
-        if(confirmar){
-        produtos.splice(encontrado, 1); 
-        localStorage.setItem("produtos", JSON.stringify(produtos));
-        document.getElementById('productDescription').value = ''; 
-        document.getElementById('productImg').file = '';
-        encontrado = -1; 
-        alert("Produto removido com sucesso.");
-    }
+        if (confirmar) {
+            produtos.splice(encontrado, 1);
+            localStorage.setItem("produtos", JSON.stringify(produtos));
+            document.getElementById('productDescription').value = '';
+            document.getElementById('productImg').file = '';
+            encontrado = -1;
+            alert("Produto removido com sucesso.");
+        }
 
     } else {
 
@@ -229,20 +228,25 @@ function voltarAdm() {
     window.location.href = "loginadm.html"
 
 }
-function voltar(){
+function voltar() {
 
     window.location.href = "logado.html"
 
 }
-function orcamento(){
+function orcamento() {
     let usuarioLogado = JSON.parse(localStorage.getItem("logado"))
     console.log(usuarioLogado)
-    if(usuarioLogado != null){
+    if (usuarioLogado != null) {
         window.location.href = 'orçamento.html'
     }
-    else{
+    else {
         window.location.href = 'home.html'
     }
+
+}
+function orcamentoAdm() {
+
+    window.location.href = 'orcamentoAdm.html'
 
 }
 
@@ -251,7 +255,7 @@ function mostrarCardsHome() {
 
     cards.innerHTML = '';
     for (i = 0; i < filtro.length; i++) {
-    
+
         cards.innerHTML += `
         <div class="card-body" onclick="orcamento()">
                <img src="${filtro[i].imagem}" alt="imagem">
@@ -264,6 +268,7 @@ function mostrarCardsHome() {
 
     }
 }
+
 
 function filtrar() {
 
@@ -286,49 +291,181 @@ mostrarCardsHome()
 
 
 
-function gerarselecoes(){
-    let opcoes = document.getElementById('opcoes')
-    opcoes.innerHTML = ''
 
-    for(i = 0; i < filtro.length; i++){
-        opcoes.innerHTML += `
-        
-        <option value="${i}">${filtro[i].nome}</option><br>
-        `
-    }
-    }
 
-function deslogar(){
+function deslogar() {
     alert("Você foi deslogado!")
     window.location.href = "index.html"
 }
 
-function editarPerfil(){
-    
+function editarPerfil() {
+
     window.location.href = "perfil.html"
 }
 
 
 function informacaoPerfil() {
-    
+
     perfilUsuario = JSON.parse(localStorage.getItem('bancoDeDados'))
     const usuarioLogado = JSON.parse(localStorage.getItem('logado'));
     let informacao = document.getElementById('info');
 
     informacao.innerHTML = '';
-    
-        
+
+
     if (usuarioLogado) {
-        
+
         const usuario = perfilUsuario.find(user => user.login === usuarioLogado.login);
 
         if (usuario) {
+            let nascimento = converterParaISO(usuario.nascimento);
             informacao.innerHTML = `
                 <p><strong>Nome:</strong> ${usuario.login}</p>
                 <p><strong>Email:</strong> ${usuario.email}</p>
-                <p><strong>Data de Nascimento:</strong> ${usuario.nascimento || 'Não informado'}</p>
-                <p><strong>Endereço:</strong> ${usuario.endereço || 'Não informado'}</p>
+                <p><strong>Data de Nascimento:</strong> ${nascimento || 'Não informado'}</p>
             `;
         }
+    }
 }
+function Cadastrados() {
+
+
+    window.location.href = 'lista.html'
+}
+function lista() {
+    let cadastrados = JSON.parse(localStorage.getItem('bancoDeDados')) || [];
+
+    let lista = document.getElementById('lista')
+
+    lista.innerHTML = ""
+
+    for (i = 0; i < cadastrados.length; i++) {
+
+
+
+        lista.innerHTML += `
+        <p><strong>Nome:</strong> ${cadastrados[i].login}</p>
+        <p><strong>Email:</strong> ${cadastrados[i].email}</p>
+        <p><strong>Senha:</strong> ${cadastrados[i].senha}</p>
+        <p><strong>Data de Nascimento:</strong> ${cadastrados[i].nascimento || 'Não informado'}</p>
+        <hr> <!-- Linha horizontal para separar os usuários -->
+        `
+    }
+}
+
+function converterParaISO(dataBR) {
+    if (!dataBR) return '';
+    const [dia, mes, ano] = dataBR.split('-');
+    return `${ano}-${mes}-${dia}`;
+}
+
+function salvarMudanca() {
+    const usuarioPerfil = JSON.parse(localStorage.getItem('bancoDeDados')) || []
+    const usuarioLogado = JSON.parse(localStorage.getItem('logado'));
+    let edicao = document.getElementById('edit-profile');
+
+    edicao.innerHTML = '';
+
+
+    if (usuarioLogado) {
+
+        const usuario = usuarioPerfil.find(user => user.login === usuarioLogado.login);
+
+        if (usuario) {
+            edicao.innerHTML =
+                `
+        <form class="edit-form" id= "edit-form">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" value="${usuario.login}" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="${usuario.email}" required>
+
+            <label for="dob">Data de Nascimento:</label>
+            <input type="date" id="dob" name="dob"  value="${usuario.nascimento}" required>
+
+            
+
+            <button type="submit" class="save-button" onclick="salvarDados()">Salvar Alterações</button>
+        </form>
+        `
+
+        }
+    }
+
+}
+function salvarDados() {
+
+    const usuarioPerfil = JSON.parse(localStorage.getItem('bancoDeDados')) || [];
+    const usuarioLogado = JSON.parse(localStorage.getItem('logado'));
+
+    if (usuarioLogado) {
+        const index = usuarioPerfil.findIndex(user => user.login === usuarioLogado.login);
+
+        if (index !== -1) {
+
+            const atualizacao = {
+                login: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                nascimento: document.getElementById('dob').value,
+                senha: usuarioLogado.senha
+            };
+
+
+            usuarioPerfil[index] = atualizacao;
+
+            localStorage.setItem('bancoDeDados', JSON.stringify(usuarioPerfil));
+
+
+            localStorage.setItem('logado', JSON.stringify(atualizacao));
+
+
+            alert('Dados atualizados com sucesso!');
+
+
+        }
+
+    }
+
+}
+//pegar o banco de dados (get)
+//ai usar o find para encontrar o usuário que você editou
+//
+
+function fazerOrcamento() {
+
+    let largura = document.getElementById("tamanhoA").value
+    let comprimento = document.getElementById("tamanhoB").value
+    let total = 0
+
+    total = largura * comprimento
+
+    let opcoes = document.getElementById("opcoes").value
+
+    switch(opcoes){
+
+        case "1":
+
+        total = (total * 200) + 800
+        break;
+
+        case '2':
+
+        total = (total * 350) + 800
+        break;
+
+        case "3":
+
+        total = (total * 400) + 800
+        break;
+
+        default:
+
+        alert("selecione uma opção valida")
+
+    }
+
+    
+    alert("O valor total do orçamento é de: " + total)
+
 }

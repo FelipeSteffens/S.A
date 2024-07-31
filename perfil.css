@@ -6,10 +6,11 @@ body {
 }
 
 header {
-    background-color: #4CAF50;
+    background-color: #a4a5a7;
     color: white;
     padding: 1em;
     text-align: center;
+    border-radius: 7px;
 }
 
 .profile-container, .edit-profile-container {
@@ -46,7 +47,7 @@ header {
     display: inline-block;
     margin-top: 1em;
     padding: 0.5em 1em;
-    background-color: #4CAF50;
+    background-color: #0056b3;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -54,7 +55,7 @@ header {
 }
 
 .edit-button:hover {
-    background-color: #45a049;
+    background-color: #13355a;
 }
 
 .edit-form {
@@ -73,10 +74,14 @@ header {
     border-radius: 5px;
     font-size: 1em;
 }
+h1{
 
+    color: #000000;
+
+}
 .save-button {
     padding: 0.5em 1em;
-    background-color: #4CAF50;
+    background-color: #0056b3;
     color: white;
     border: none;
     border-radius: 5px;
@@ -84,5 +89,5 @@ header {
 }
 
 .save-button:hover {
-    background-color: #45a049;
+    background-color: #13355a;
 }
